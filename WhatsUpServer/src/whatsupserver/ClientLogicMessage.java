@@ -5,26 +5,18 @@
  */
 package whatsupserver;
 
-import java.util.List;
-
 /**
  *
  * @author davide
  */
-//C'è troppa luce
-public class Room {
+public class ClientLogicMessage 
+{
+    public static ClientLogicMessage instance = null;
     
-    public String name;
-    public String password;
-    public int id;
-    public List<ConnectedClient> clients;
-    public int maxClients;
-    
-    
-    public Room(String nameRoom, )
+    public ClientLogicMessage()
     {
-        
-        
+        if(instance != null) return;
+        instance = this;
     }
     
     
