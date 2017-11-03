@@ -9,7 +9,7 @@ package wahtsup;
  *
  * @author d.gozzi
  */
-public class WahtsUp {
+public class WhatsUp {
 
     /**
      * @param args the command line arguments
