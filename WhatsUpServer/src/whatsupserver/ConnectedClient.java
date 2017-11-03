@@ -6,7 +6,15 @@
 package whatsupserver;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,15 +25,17 @@ public class ConnectedClient extends Thread
     
     public String ip;
     public String nickname;
-    public Room roomConnected;
+    public Room roomConnected = null;
     public Color color;
-    public ServerSocket socket;
-    
-    public ConnectedClient(ServerSocket clientSocket)
+    public Socket socket;
+    public PrintWriter clientWriter;
+    public BufferedReader clientListener;
+    public ConnectedClient(Socket clientSocket) throws IOException
     {
         socket = clientSocket;
+        clientWriter=new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+        clientListener = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.start();
-
     }
     
     public void SetUpClient(String ipClient, String nicknameClient, Color colorClient)
@@ -39,7 +49,21 @@ public class ConnectedClient extends Thread
     @Override
     public void run()
     {
-       
+        String socketInput;
+        while (true) 
+        {            
+            try 
+            {
+                socketInput = clientListener.readLine();
+            
+            
+            
+            } catch (IOException ex) 
+            {
+                Logger.getLogger(ConnectedClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+        }
     }
     
 }

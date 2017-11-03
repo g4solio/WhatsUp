@@ -1,0 +1,20 @@
+
+FromClientToServer
+	<Communication>
+		-------------------------------------------------
+	<Settings>
+		-RemoveMeFromRoom
+		-AddMeToRoom:[idRoom]:[Password]
+		-CreateARoom:[NameRoom]:[Password]:[NumeroMax]
+		-Disconnecting
+		-AskForPeopleInRoom
+		-ListOfRooms
+
+FromServerToClient
+	<Communication>
+		-------------------------------------------------
+	<Settings>
+		-AcceptedToRoom
+		-NotAcceptedToRoom:[Reason]
+		-Refresh
+		

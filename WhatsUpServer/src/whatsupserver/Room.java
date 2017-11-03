@@ -21,10 +21,52 @@ public class Room {
     public int maxClients;
     
     
-    public Room(String nameRoom, )
+    public Room(String nameRoom, int maxClientsRoom, int idRoom, String passwordRoom)
     {
         
+        name = nameRoom;
+        maxClients = maxClientsRoom;
+        id = idRoom;
+        password = passwordRoom;
         
+    }
+    
+    
+    //1----> Problem Login
+    //0----> ClientAccepted
+    public int AcceptConnectionByClient(ConnectedClient client, String digitatedPassword)
+    {
+        if(digitatedPassword.equals(password)&&!(password.equals(""))) return 1;
+        clients.add(client);
+        client.roomConnected=this;
+        SendSettingsMsg("RefreshList");
+        return 0;
+    }
+    
+    public void RemoveClientFromRoom(ConnectedClient client)
+    {
+        client.roomConnected=null;
+        clients.remove(client);
+        SendSettingsMsg("RefreshList");
+    }
+
+    
+    
+    public void SendMsgToAllClients(String message, ConnectedClient emitter)
+    {
+        //Send The Msg
+        message =  "<Communication>" + emitter.nickname + ":\t" + message; 
+        for (ConnectedClient client : clients) {
+            ClientSpeaker.instance.SendMsgToClient(client.clientWriter, message);
+        }
+    }
+    
+    public void SendSettingsMsg(String message)
+    {
+        message = "<Settings>" + message;
+        for (ConnectedClient client : clients) {
+            ClientSpeaker.instance.SendMsgToClient(client.clientWriter, message);
+        }
     }
     
     
