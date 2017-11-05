@@ -12,63 +12,67 @@ import java.util.List;
  * @author davide
  */
 //C'è troppa luce
-public class Room {
-    
+public class Room
+{
+
     public String name;
     public String password;
     public int id;
     public List<ConnectedClient> clients;
     public int maxClients;
-    
-    
+
     public Room(String nameRoom, int maxClientsRoom, int idRoom, String passwordRoom)
     {
-        
+
         name = nameRoom;
         maxClients = maxClientsRoom;
         id = idRoom;
         password = passwordRoom;
-        
+
     }
-    
-    
+
     //1----> Problem Login
     //0----> ClientAccepted
     public int AcceptConnectionByClient(ConnectedClient client, String digitatedPassword)
     {
-        if(digitatedPassword.equals(password)&&!(password.equals(""))) return 1;
+        if (digitatedPassword.equals(password) && !(password.equals("")))
+        {
+            return 1;
+        }
+        if (clients.size() >= maxClients)
+        {
+            return 2;
+        }
         clients.add(client);
-        client.roomConnected=this;
-        SendSettingsMsg("RefreshList");
+        client.roomConnected = this;
+        SendSettingsMsgToAllClients("RefreshList");
         return 0;
     }
-    
+
     public void RemoveClientFromRoom(ConnectedClient client)
     {
-        client.roomConnected=null;
+        client.roomConnected = null;
         clients.remove(client);
-        SendSettingsMsg("RefreshList");
+        SendSettingsMsgToAllClients("RefreshList");
     }
 
-    
-    
     public void SendMsgToAllClients(String message, ConnectedClient emitter)
     {
         //Send The Msg
-        message =  "<Communication>" + emitter.nickname + ":\t" + message; 
-        for (ConnectedClient client : clients) {
+        message = "<Communication>" + emitter.nickname + ":" + emitter.color + ":" + message;
+        for (ConnectedClient client : clients)
+        {
             ClientSpeaker.instance.SendMsgToClient(client.clientWriter, message);
         }
     }
-    
-    public void SendSettingsMsg(String message)
+
+    public void SendSettingsMsgToAllClients(String message)
     {
         message = "<Settings>" + message;
-        for (ConnectedClient client : clients) {
+        for (ConnectedClient client : clients)
+        {
             ClientSpeaker.instance.SendMsgToClient(client.clientWriter, message);
         }
     }
-    
-    
-    
+
 }

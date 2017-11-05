@@ -30,6 +30,7 @@ public class ConnectedClient extends Thread
     public Socket socket;
     public PrintWriter clientWriter;
     public BufferedReader clientListener;
+    public volatile boolean HasToBeStopped = false;
     public ConnectedClient(Socket clientSocket) throws IOException
     {
         socket = clientSocket;
@@ -50,20 +51,37 @@ public class ConnectedClient extends Thread
     public void run()
     {
         String socketInput;
-        while (true) 
+        while (!HasToBeStopped) 
         {            
             try 
             {
                 socketInput = clientListener.readLine();
             
-            
+                ClientListenerMessageHandler.instance.HandleMsg(this, socketInput);
             
             } catch (IOException ex) 
             {
-                Logger.getLogger(ConnectedClient.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error reading the socket " + ex);
             }
              
         }
     }
     
+    public void Disconnect()
+    {
+        try
+        {
+            socket.close();
+            HasToBeStopped = true;
+            this.join();
+            
+        } catch (IOException ex)
+        {
+            System.out.println("Error disconnect client " + ex);
+        } catch (InterruptedException ex)
+        {
+            System.out.println("Error disconnect client " + ex);
+        }
+        return;
+    }
 }

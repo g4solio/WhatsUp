@@ -7,14 +7,16 @@ FromClientToServer
 		-AddMeToRoom:[idRoom]:[Password]
 		-CreateARoom:[NameRoom]:[Password]:[NumeroMax]
 		-Disconnecting
-		-AskForPeopleInRoom
+		-PeopleInRoom
 		-ListOfRooms
-
+		-Presentation:[NickName]:[color]
 FromServerToClient
 	<Communication>
+		[EmitterNickName]:[Color]:[Message]
 		-------------------------------------------------
 	<Settings>
 		-AcceptedToRoom
 		-NotAcceptedToRoom:[Reason]
-		-Refresh
-		
+		-RefreshList
+		-PeopleInRoom:[User1]:[User2]:[User3]:[UserN]
+		-AvailableRooms:[Room1]:[Room2]:[Room3]:[Room4]		
