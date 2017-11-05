@@ -72,6 +72,7 @@ public class ConnectedClient extends Thread
         try
         {
             socket.close();
+            roomConnected.RemoveClientFromRoom(this);
             HasToBeStopped = true;
             this.join();
             

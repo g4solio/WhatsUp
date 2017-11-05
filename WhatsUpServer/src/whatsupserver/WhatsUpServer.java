@@ -5,8 +5,13 @@
  */
 package whatsupserver;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,13 +34,22 @@ public class WhatsUpServer {
     }
     
     public static void main(String[] args) {
-        // TODO code application logic here
-        
-        
-        
-        
-        
-        
+        try
+        {
+            // TODO code application logic here
+            ServerSocket serverSocket = new ServerSocket(1050);
+            System.out.println("Server Has Been Started");
+            while(true)
+            {
+                Socket socket = serverSocket.accept();
+                System.out.println("A new Connection has been accepted");
+                new ConnectedClient(socket);
+            }
+            
+        } catch (IOException ex)
+        {
+            System.out.println("error Starting Server " + ex);
+        }
     }
     
     
