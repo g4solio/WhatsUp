@@ -74,6 +74,8 @@ public class ConnectedClient extends Thread
             socket.close();
             roomConnected.RemoveClientFromRoom(this);
             HasToBeStopped = true;
+            clientWriter.close();
+            clientListener.close();
             this.join();
             
         } catch (IOException ex)

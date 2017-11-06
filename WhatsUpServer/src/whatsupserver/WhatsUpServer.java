@@ -8,6 +8,8 @@ package whatsupserver;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -23,7 +25,7 @@ public class WhatsUpServer {
      * @param args the command line arguments
      */
     
-    public static List<Room> RoomsList;
+    public static ArrayList<Room> RoomsList;
     
     static Random myRandom = null;
     
@@ -34,6 +36,9 @@ public class WhatsUpServer {
     }
     
     public static void main(String[] args) {
+        new ClientListenerMessageHandler();
+        new ClientSpeaker();
+        RoomsList = new ArrayList<Room>();
         try
         {
             // TODO code application logic here

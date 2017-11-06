@@ -5,6 +5,7 @@
  */
 package whatsupserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class Room
     public String name;
     public String password;
     public int id;
-    public List<ConnectedClient> clients;
+    public ArrayList<ConnectedClient> clients;
     public int maxClients;
 
     public Room(String nameRoom, int maxClientsRoom, int idRoom, String passwordRoom)
@@ -28,6 +29,7 @@ public class Room
         maxClients = maxClientsRoom;
         id = idRoom;
         password = passwordRoom;
+        clients = new ArrayList<>();
 
     }
 
