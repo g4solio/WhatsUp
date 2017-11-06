@@ -55,8 +55,9 @@ public class ConnectedClient extends Thread
         {            
             try 
             {
+                System.out.println("Cycle " + HasToBeStopped);
                 socketInput = clientListener.readLine();
-            
+                System.out.println("Msg To be Handled: " + socketInput);
                 ClientListenerMessageHandler.instance.HandleMsg(this, socketInput);
             
             } catch (IOException ex) 
@@ -71,8 +72,9 @@ public class ConnectedClient extends Thread
     {
         try
         {
+            System.out.println("Disconnecting");
             socket.close();
-            roomConnected.RemoveClientFromRoom(this);
+            if(roomConnected != null)roomConnected.RemoveClientFromRoom(this);
             HasToBeStopped = true;
             clientWriter.close();
             clientListener.close();

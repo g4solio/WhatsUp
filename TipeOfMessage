@@ -19,4 +19,5 @@ FromServerToClient
 		-NotAcceptedToRoom:[Reason]
 		-RefreshList
 		-PeopleInRoom:[User1]:[User2]:[User3]:[UserN]
-		-AvailableRooms:[Room1]:[Room2]:[Room3]:[Room4]		
+		-AvailableRooms:[Room1]:[Room2]:[Room3]:[Room4]
+		-Done		

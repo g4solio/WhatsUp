@@ -25,6 +25,7 @@ public class ClientSpeaker {
     public void SendMsgToClient(PrintWriter clientChannel, String msg)
     {
         clientChannel.println(msg);
+        clientChannel.flush();
     }
     
     

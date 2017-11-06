@@ -27,6 +27,7 @@ public class ClientListenerMessageHandler
 
     public void HandleMsg(ConnectedClient client, String msg)
     {
+        System.out.println("Handling msg: " + msg);
         String[] splittedMsg = msg.split(">", 2);
 
         String tipeOfMessage = splittedMsg[0];
@@ -41,6 +42,8 @@ public class ClientListenerMessageHandler
             if (message.equals("RemoveMeFromRoom"))
             {
                 client.roomConnected.RemoveClientFromRoom(client);
+                
+                
                 return;
             }
             if (message.contains("AddMeToRoom"))

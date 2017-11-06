@@ -30,7 +30,7 @@ public class Room
         id = idRoom;
         password = passwordRoom;
         clients = new ArrayList<>();
-
+        System.out.println("A new Room has been reated: " + name);
     }
 
     //1----> Problem Login
