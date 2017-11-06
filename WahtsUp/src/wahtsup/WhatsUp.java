@@ -33,6 +33,7 @@ public class WhatsUp {
             BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
             new WriterClass();
             new ListenerClass();
+            new MessageHandler();
             while (true)
             {                
                 

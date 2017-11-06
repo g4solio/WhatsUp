@@ -27,6 +27,7 @@ public class ClientListenerMessageHandler
 
     public void HandleMsg(ConnectedClient client, String msg)
     {
+        if(msg.equals("") || msg.equals(" ") || msg == null) return;
         System.out.println("Handling msg: " + msg);
         String[] splittedMsg = msg.split(">", 2);
 
@@ -34,6 +35,7 @@ public class ClientListenerMessageHandler
         String message = splittedMsg[1];
         if (tipeOfMessage.contains("Communication"))
         {
+            if(client.roomConnected == null) System.out.println("That sould never happen");
             client.roomConnected.SendMsgToAllClients(message, client);
             return;
         }
@@ -67,7 +69,7 @@ public class ClientListenerMessageHandler
                 }
                 if (success == 3)
                 {
-                    ClientSpeaker.instance.SendMsgToClient(client.clientWriter, "<Settings>NotAcceptedToRoom:RoomNotFind");
+                    ClientSpeaker.instance.SendMsgToClient(client.clientWriter, "<Settings>NotAcceptedToRoom:RoomNotFound");
                     return;
                 }
                 //finire If Statemente guardare file "TipeOfMessage"
@@ -97,10 +99,10 @@ public class ClientListenerMessageHandler
             }
             if (message.contains("ListOfRooms"))
             {
-                String availableRooms = "<Settings>PeopleInRoom";
+                String availableRooms = "<Settings>ListOfRooms";
                 for (Room availableRoom : WhatsUpServer.RoomsList)
                 {
-                    availableRooms += ":" + availableRoom.name;
+                    availableRooms += ":" + availableRoom.name + ":" + availableRoom.id;
                 }
                 ClientSpeaker.instance.SendMsgToClient(client.clientWriter, availableRooms);
                 return;
@@ -108,8 +110,7 @@ public class ClientListenerMessageHandler
             if (message.contains("Presentation"))
             {
                 String[] metaMessage = message.split(":");
-                Color.getColor(metaMessage[2]);
-                client.SetUpClient(client.socket.getInetAddress().toString(), metaMessage[1], Color.getColor(metaMessage[2]));
+                client.SetUpClient(client.socket.getInetAddress().toString(), metaMessage[1], new Color(Integer.parseInt(metaMessage[2])));
                 return;
             }
         }

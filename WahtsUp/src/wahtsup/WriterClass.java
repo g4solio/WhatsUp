@@ -5,6 +5,7 @@
  */
 package wahtsup;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -16,31 +17,69 @@ import static wahtsup.WhatsUp.socket;
  *
  * @author davide
  */
-public class WriterClass   
+public class WriterClass
 {
+
     public PrintWriter writerToServer;
     public static WriterClass instance = null;
-    
-    public WriterClass ()
+
+    public WriterClass()
     {
-        if(instance != null) return;
-        instance = this;
-        try 
+        if (instance != null)
         {
-            writerToServer=new PrintWriter(new OutputStreamWriter(WhatsUp.socket.getOutputStream()));
-            
-        } catch (IOException ex) 
+            return;
+        }
+        instance = this;
+        try
+        {
+            writerToServer = new PrintWriter(new OutputStreamWriter(WhatsUp.socket.getOutputStream()));
+
+        } catch (IOException ex)
         {
             System.out.println("Error Instantiatoing the writer: " + ex);
         }
     }
-    
 
     public void WriteToServer(String msg)
     {
         writerToServer.println(msg);
         writerToServer.flush();
-        
+
     }
-    
+
+    public void PresentateMySelf(String nickname, Color color)
+    {
+        WriteToServer("<Settings>Presentation:" + nickname + ":" + color.getRGB());
+    }
+
+    public void RemoveMeFromRoom()
+    {
+        WriteToServer("<Settings>RemoveMeFromRoom");
+    }
+
+    public void AddMeToRoom(int idRoom, String passwordRoom)
+    {
+        WriteToServer("<Settings>AddMeToRoom:" + idRoom + ":" + passwordRoom);
+    }
+
+    public void CreateARoom(String nameRoom, String password, int numeroMax)
+    {
+        WriteToServer("<Settings>CreateARoom:" + nameRoom + ":" + password + ":" + numeroMax);
+    }
+
+    public void Disconnecting()
+    {
+        WriteToServer("<Settings>Disconnecting");
+    }
+
+    public void AskForPeopleInRoom()
+    {
+        WriteToServer("<Settings>PeopleInRoom");
+    }
+
+    public void AskForAvailableRooms()
+    {
+        WriteToServer("<Settings>ListOfRooms");
+    }
+
 }

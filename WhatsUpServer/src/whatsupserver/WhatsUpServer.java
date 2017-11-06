@@ -61,7 +61,9 @@ public class WhatsUpServer {
     
     public static int AddClientToRoom(ConnectedClient client, int idRoom, String password)
     {
-        for (Room room : RoomsList) {
+        for (Room room : RoomsList) 
+        {
+            System.out.println(room.id + " == " + idRoom);
            if(room.id != idRoom) continue;
            return room.AcceptConnectionByClient(client, password);
         }
@@ -71,7 +73,7 @@ public class WhatsUpServer {
     public static int CreateRoom(ConnectedClient client, String nameRoom, String password, int numeroMax)
     {
         int idRoom = CreateIdRoom();
-        RoomsList.add(new Room(nameRoom, idRoom, numeroMax, password));
+        RoomsList.add(new Room(nameRoom, numeroMax, idRoom, password));
         AddClientToRoom(client, idRoom, password);
         return 0;
     }
@@ -89,6 +91,7 @@ public class WhatsUpServer {
             }
             break;
         }
+        System.out.println("Random Number : " + randomNumber);
         return randomNumber;   
     }
 }

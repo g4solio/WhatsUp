@@ -1,6 +1,7 @@
 
 FromClientToServer
 	<Communication>
+		[EmitterNickName]:[Color]:[Message]
 		-------------------------------------------------
 	<Settings>
 		-RemoveMeFromRoom
@@ -19,5 +20,9 @@ FromServerToClient
 		-NotAcceptedToRoom:[Reason]
 		-RefreshList
 		-PeopleInRoom:[User1]:[User2]:[User3]:[UserN]
-		-AvailableRooms:[Room1]:[Room2]:[Room3]:[Room4]
-		-Done		
+		-AvailableRooms:[Room1]:[id]:[Room2]:[id]:[Room3]:[id]:[Room4]:[id]
+
+
+<Settings>Presentation:g4solio:yellow
+<Settings>CreateARoom:FirstRoom:daddidaffi:10
+<Settings>ListOfRooms

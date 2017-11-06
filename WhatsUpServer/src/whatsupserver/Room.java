@@ -37,7 +37,8 @@ public class Room
     //0----> ClientAccepted
     public int AcceptConnectionByClient(ConnectedClient client, String digitatedPassword)
     {
-        if (digitatedPassword.equals(password) && !(password.equals("")))
+        System.out.println("Accepting Connection");
+        if (!digitatedPassword.equals(password) && !(password.equals("")))
         {
             return 1;
         }

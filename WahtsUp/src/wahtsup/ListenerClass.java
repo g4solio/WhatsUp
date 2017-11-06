@@ -38,11 +38,13 @@ public class ListenerClass extends Thread
     @Override
     public void run()
     {
+        String msgFromServer;
         while (true) 
         {            
             try 
             {
-                System.out.println("Msg From Server: " + listenerFromServer.readLine());
+                msgFromServer = listenerFromServer.readLine();
+                System.out.println("Msg From Server: " + msgFromServer);
             } catch (IOException ex) 
             {
                 System.out.println("Error Reading From Socket: " + ex);
