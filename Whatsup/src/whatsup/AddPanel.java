@@ -15,10 +15,13 @@ import javax.swing.*;
  * @author mralsi
  */
 public class AddPanel extends JPanel {
-    public AddPanel(){
+    public JFrame mainFrame;
+    public static  AddPanel instance;
+    public AddPanel(JFrame frame){
         super();
+        instance=this;
         //Parte di login
-        
+        mainFrame = frame;
         JPanel login = new JPanel(new GridLayout(7,2,5,5));
         login.add(new JLabel("Nickname: "));
         JTextField nick = new JTextField(15);
@@ -46,8 +49,8 @@ public class AddPanel extends JPanel {
         go.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog/*C'è troppa luce dentro la*/ stanza = new JDialog();
                 JPanel p2 = new JPanel();
+                
                 p2.add(new JLabel("Stanze"));
                 JTextArea textArea = new JTextArea(20,35);
                 
@@ -65,13 +68,63 @@ public class AddPanel extends JPanel {
                 p2.add(esci);
                 JButton partecipa = new JButton("Partecipa");
                 p2.add(partecipa);
-                
+                //instance.removeAll();
+                instance.add(p2);
                 //75%
                 nuova.addActionListener(new ActionListener (){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JDialog nuova = new JDialog();
+                        Nuova();
+                    }
+                    
+                });
+                
+                aggiorna.addActionListener(new ActionListener (){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        
+                    }
+                    
+                });
+                
+                //fine
+                esci.addActionListener(new ActionListener (){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mainFrame.dispose();
+                        
+                    }
+                    
+                });
+                
+                
+                partecipa.addActionListener(new ActionListener (){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Partecipa();
+                    }
+                    
+                });
+                
+                
+            }
+            
+        });
+    }
+    
+    public void setNomeStanza(String nome){
+        
+    }
+    
+    public String getNomeStanza(){
+        return null;
+    }
+    
+    
+    public void Nuova(){
                         JPanel p3 = new JPanel();
+                        instance.removeAll();
+                        instance.add(p3);
                         p3.add(new JLabel("Nome Stanza"));
                         JTextField nome = new JTextField(15);
                         p3.add(nome);
@@ -90,96 +143,26 @@ public class AddPanel extends JPanel {
                         esci.addActionListener(new ActionListener (){
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                stanza.dispose();
+                                mainFrame.dispose();
                                 }
                             });
                         
                         continua.addActionListener(new ActionListener () {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                JDialog chat = new JDialog();
-                                JPanel p5 = new JPanel();
-                                JLabel stanza = new JLabel("Nome stanza");
-                                p5.add(stanza);
-                                JLabel nPartecipanti = new JLabel("Numero partecipanti");
-                                p5.add(nPartecipanti);
-                                JTextArea conversazione = new JTextArea(18,32);
-                                p5.add(conversazione);
-                                JTextArea utenti = new JTextArea(18,13);
-                                p5.add(utenti);
-                                JButton esci = new JButton("EXIT");
-                                p5.add(esci);
-                                esci.addActionListener(new ActionListener() {
-                                    @Override
-                                    public void actionPerformed(ActionEvent e) {
-                                        chat.dispose();
-                                        JDialog prova = new JDialog();
-                                        prova.add(p2);
-                                        prova.setSize(600,500);
-                                        prova.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                        prova.setVisible(true);
-                                    }
-                                    
-                                });
-                                    
-                                JTextArea barra = new JTextArea(2,50);
-                                p5.add(barra);
-                                JButton invio = new JButton("INVIO");
-                                p5.add(invio);
-                                
-                                invio.addActionListener(new ActionListener(){
-                                    @Override
-                                    public void actionPerformed(ActionEvent e) {
-                                       conversazione.setText(conversazione.getText()+"\n IO: "+barra.getText());
-                                       barra.setText("");
-                                    }
-                                    
-                                });
-                                
-                                
-                                
-                            nuova.dispose();
-                            chat.add(p5);
-                            //ricordati di aggiustare
-                            chat.setSize(1000,1000);
-                            chat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                            chat.setVisible(true);
+                                Chat();
                             }
                             
                         });
                         
-                        stanza.dispose();
-                        nuova.add(p3);
-                        nuova.setSize(600,500);
-                        nuova.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        nuova.setVisible(true);
-                                            }
-                    
-                });
-                
-                aggiorna.addActionListener(new ActionListener (){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        
-                    }
-                    
-                });
-                //fine
-                esci.addActionListener(new ActionListener (){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        stanza.dispose();
-                        
-                    }
-                    
-                });
-                //
-                partecipa.addActionListener(new ActionListener (){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        JDialog entra = new JDialog();
+                        mainFrame.dispose();
+
+    }
+    
+    public void Partecipa(){
                         JPanel p4 = new JPanel(new GridLayout());
-                        
+                        instance.removeAll();
+                        instance.add(p4);
                         p4.add(new JLabel("Welcome!"));
                         p4.add(new JLabel("Password"));
                         JTextField pass = new JTextField(15);
@@ -189,27 +172,30 @@ public class AddPanel extends JPanel {
                         JButton continua = new JButton("Continua");
                         p4.add(continua);
                         
-                        
-                        
                         esci.addActionListener(new ActionListener (){
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            entra.dispose();
+                            mainFrame.dispose();
                             
                             }
                         });
                         
-                        
                         continua.addActionListener(new ActionListener () {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                JDialog chat = new JDialog();
-                                /*ho copiato ed incollato il codice di quando 
-                                crei una stanza, non ho sbatti di oensare come 
-                                fare che i due bottoni puntino allo stesso panel*/
-                                
+                                Chat();
+                            }
+                        });
+                        
+                        //stanza.dispose();
+
+    }
+    
+    public void Chat(){
                                 JPanel p5 = new JPanel();
                                 JLabel stanza = new JLabel("Nome stanza");
+                                instance.removeAll();
+                                instance.add(p5);
                                 p5.add(stanza);
                                 JLabel nPartecipanti = new JLabel("Numero partecipanti");
                                 p5.add(nPartecipanti);
@@ -222,9 +208,9 @@ public class AddPanel extends JPanel {
                                 esci.addActionListener(new ActionListener() {
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
-                                        chat.dispose();
+                                        mainFrame.dispose();
                                         JDialog prova = new JDialog();
-                                        prova.add(p2);
+                                        //prova.add(p2);
                                         prova.setSize(600,500);
                                         prova.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                         prova.setVisible(true);
@@ -248,44 +234,8 @@ public class AddPanel extends JPanel {
                                 
                                 
                                 
-                            entra.dispose();
-                            chat.add(p5);
-                            //ricordati di aggiustare
-                            chat.setSize(1000,1000);
-                            chat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                            chat.setVisible(true);
-                            }
-                            
-                        
-                            
-                        });
-                        
-                        stanza.dispose();
-                        entra.add(p4);
-                        entra.setSize(600,500);
-                        entra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        entra.setVisible(true);
-                        
-                        
-                        
-                    }
-                    
-                });
-                
-                stanza.add(p2);
-                stanza.setSize(600,500);
-                stanza.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                stanza.setVisible(true);
-                
-            }
-        });
+                            //nuova.dispose();
+
     }
-    
-    public void setNomeStanza(String nome){
-        
-    }
-    
-    public String getNomeStanza(){
-        return null;
-    }
+
 }

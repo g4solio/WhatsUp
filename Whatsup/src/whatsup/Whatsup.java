@@ -19,7 +19,7 @@ public class Whatsup {
     public static void main(String[] args) {
         // TODO code application logic here
         JFrame frame = new JFrame("WhatsUp");
-                frame.add(new AddPanel());
+                frame.add(new AddPanel(frame));
                 
                 frame.setSize(600,500);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
