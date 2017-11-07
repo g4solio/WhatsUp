@@ -26,27 +26,47 @@ public class WhatsUp {
      */
     public static Socket socket;
     
+    public static boolean InputFromConsole = true;
+    
     public static void main(String[] args) {
-        try {
-            // TODO code application logic here
-            socket = new Socket(InetAddress.getByName("127.0.0.1"),1050);
-            BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
-            new WriterClass();
-            new ListenerClass();
-            new MessageHandler();
-            while (true)
-            {                
-                
-                String userInput = inputKeyboard.readLine();
-                WriterClass.instance.WriteToServer(userInput);
-                
+        if(InputFromConsole)
+        {
+            try 
+            {
+                // TODO code application logic here
+                BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
+                new WriterClass();
+                new ListenerClass();
+                new MessageHandler();
+                while (true)
+                {                
+
+                    String userInput = inputKeyboard.readLine();
+                    WriterClass.instance.WriteToServer(userInput);
+
+                }
+
+
+            } 
+            catch (IOException ex) 
+            {
+                Logger.getLogger(WhatsUp.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-
-        } catch (IOException ex) {
-            Logger.getLogger(WhatsUp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    public static void SetSocketParameter(String address)
+    {
+        try 
+        {
+            socket = new Socket(InetAddress.getByName(address),1050);
+        } 
+        catch (IOException ex) 
+        {
+            System.out.println("Error creating Socket: " + ex);
+        }
+
     }
     
 }

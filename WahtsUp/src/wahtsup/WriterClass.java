@@ -46,6 +46,11 @@ public class WriterClass
         writerToServer.flush();
 
     }
+    
+    public void WriteComunication(String msgToSend)
+    {
+        WriteToServer("<Communication>" + msgToSend);
+    }
 
     public void PresentateMySelf(String nickname, Color color)
     {
