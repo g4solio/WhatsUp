@@ -65,7 +65,7 @@ public class Room
     public void SendMsgToAllClients(String message, ConnectedClient emitter)
     {
         //Send The Msg
-        message = "<Communication>" + emitter.nickname + ":" + emitter.color + ":" + message;
+        message = "<Communication>" + emitter.nickname + ":" + emitter.color.getRGB() + ":" + message;
         for (ConnectedClient client : clients)
         {
             ClientSpeaker.instance.SendMsgToClient(client.clientWriter, message);

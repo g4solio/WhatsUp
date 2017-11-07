@@ -26,7 +26,7 @@ public class MessageHandler
     public void HandleMsg(String msg)
     {
 
-        if (msg.equals("") || msg.equals(" ") || msg == null)
+        if (msg == null || msg.equals("") || msg.equals(" "))
         {
             return;
         }
