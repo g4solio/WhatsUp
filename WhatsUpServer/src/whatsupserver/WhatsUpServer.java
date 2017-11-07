@@ -94,4 +94,14 @@ public class WhatsUpServer {
         System.out.println("Random Number : " + randomNumber);
         return randomNumber;   
     }
+    
+    public static void RemoveRoom(int idRoom)
+    {
+        for (Room room : RoomsList) 
+        {
+            if(room.id != idRoom) continue;
+            RoomsList.remove(room);
+            return;
+        }
+    }
 }

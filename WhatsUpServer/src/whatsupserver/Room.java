@@ -57,6 +57,9 @@ public class Room
         client.roomConnected = null;
         clients.remove(client);
         SendSettingsMsgToAllClients("RefreshList");
+        if(clients.size() <= 0) WhatsUpServer.RemoveRoom(id);           
+        
+        
     }
 
     public void SendMsgToAllClients(String message, ConnectedClient emitter)

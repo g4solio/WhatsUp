@@ -23,6 +23,6 @@ FromServerToClient
 		-AvailableRooms:[Room1]:[id]:[Room2]:[id]:[Room3]:[id]:[Room4]:[id]
 
 
-<Settings>Presentation:g4solio:yellow
+<Settings>Presentation:g4solio:-256
 <Settings>CreateARoom:FirstRoom:daddidaffi:10
 <Settings>ListOfRooms

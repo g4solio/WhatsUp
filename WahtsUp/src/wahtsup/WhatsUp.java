@@ -5,6 +5,7 @@
  */
 package wahtsup;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,11 +34,13 @@ public class WhatsUp {
         {
             try 
             {
+                SetSocketParameter("127.0.0.1");
                 // TODO code application logic here
                 BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
                 new WriterClass();
                 new ListenerClass();
                 new MessageHandler();
+                System.out.println(Color.YELLOW.getRGB());
                 while (true)
                 {                
 

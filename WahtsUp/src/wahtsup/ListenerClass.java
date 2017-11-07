@@ -45,6 +45,7 @@ public class ListenerClass extends Thread
             {
                 msgFromServer = listenerFromServer.readLine();
                 System.out.println("Msg From Server: " + msgFromServer);
+                MessageHandler.instance.HandleMsg(msgFromServer);
             } catch (IOException ex) 
             {
                 System.out.println("Error Reading From Socket: " + ex);
