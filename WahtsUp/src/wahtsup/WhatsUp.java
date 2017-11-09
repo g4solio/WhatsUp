@@ -34,7 +34,7 @@ public class WhatsUp {
         {
             try 
             {
-                SetSocketParameter("127.0.0.1");
+                SetSocketParameter("10.1.2.9");
                 // TODO code application logic here
                 BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
                 new WriterClass();
