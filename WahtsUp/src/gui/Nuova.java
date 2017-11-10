@@ -13,16 +13,16 @@ import javax.swing.event.*;
  * @author davide
  */
 public class Nuova extends JPanel {
-    private JLabel jcomp1;
-    private JLabel jcomp2;
-    private JLabel jcomp3;
-    private JPasswordField JTextFieldPass1;
-    private JPasswordField JTextFieldPass2;
-    private JTextField JTextFieldNome;
-    private JLabel jcomp7;
-    private JButton JButtonEsci;
-    private JButton JButtonCrea;
-    private JSpinner max;
+    public JLabel jcomp1;
+    public JLabel jcomp2;
+    public JLabel jcomp3;
+    public JPasswordField JTextFieldPass1;
+    public JPasswordField JTextFieldPass2;
+    public JTextField JTextFieldNome;
+    public JLabel jcomp7;
+    public JButton JButtonEsci;
+    public JButton JButtonCrea;
+    public JSpinner max;
     
     public Nuova() {
         //construct components
@@ -70,11 +70,11 @@ public class Nuova extends JPanel {
     }
 
 
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("Nuova");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new Nuova());
-        frame.pack();
-        frame.setVisible (true);
-    }
+//    public static void main (String[] args) {
+//        JFrame frame = new JFrame ("Nuova");
+//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add (new Nuova());
+//        frame.pack();
+//        frame.setVisible (true);
+//    }
 }

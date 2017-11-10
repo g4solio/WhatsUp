@@ -18,7 +18,7 @@ import java.awt.Color;
 
     public class ColorChooserButton extends JButton {
 
-        private Color current;
+        public Color current;
 
         public ColorChooserButton(Color c) {
             setSelectedColor(c); 
@@ -59,7 +59,7 @@ import java.awt.Color;
             public void colorChanged(Color newColor);
         }
 
-        private List<ColorChangedListener> listeners = new ArrayList<ColorChangedListener>();
+        public List<ColorChangedListener> listeners = new ArrayList<ColorChangedListener>();
 
         public void addColorChangedListener(ColorChangedListener toAdd) {
             listeners.add(toAdd);

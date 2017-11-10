@@ -5,19 +5,26 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.*;
+import wahtsup.WriterClass;
 
 public class Stanze extends JPanel {
-    private JTextArea jcomp1;
-    private JButton JButtonNuova;
-    private JButton JButtonAggiorna;
-    private JButton JButtonEsci;
-    private JButton JButtonPartecipa;
-
+    public JList jcomp1;
+    public JButton JButtonNuova;
+    public JButton JButtonAggiorna;
+    public JButton JButtonEsci;
+    public JButton JButtonPartecipa;
+    public ArrayList<String> roomsList;
+    public ArrayList<Integer> roomsListId;
+    
     public Stanze() {
         //construct components
-        jcomp1 = new JTextArea (5, 5);
+        roomsList = new ArrayList<String>();
+        roomsListId = new ArrayList<>();
+        jcomp1 = new JList<String>() ;
         JButtonNuova = new JButton ("Nuova stanza");
         JButtonAggiorna = new JButton ("Aggiorna");
         JButtonEsci = new JButton ("Esci");
@@ -40,14 +47,42 @@ public class Stanze extends JPanel {
         JButtonAggiorna.setBounds (170, 335, 85, 25);
         JButtonEsci.setBounds (285, 335, 60, 25);
         JButtonPartecipa.setBounds (350, 335, 90, 25);
+        
     }
 
 
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("Stanze");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new Stanze());
-        frame.pack();
-        frame.setVisible (true);
+//    public static void main (String[] args) {
+//        JFrame frame = new JFrame ("Stanze");
+//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add (new Stanze());
+//        frame.pack();
+//        frame.setVisible (true);
+//    }
+
+    public void AskForCreatedRooms() 
+    {
+        WriterClass.instance.AskForAvailableRooms();
+    }
+    
+    public void AddNewRoomToList(String roomName, int idRoom)
+    {
+        roomsList.add(roomName);
+        roomsListId.add(idRoom);
+    }
+    
+    public void ResetListRoom()
+    {
+        roomsList.clear();
+        roomsListId.clear();
+    }
+
+    public void ResetJList() 
+    {
+        jcomp1.setListData(new Vector(0));
+    }
+
+    public void UpdateJList() 
+    {
+        jcomp1.setListData(roomsList.toArray());
     }
 }

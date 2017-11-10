@@ -15,7 +15,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import gui.*;
+import javax.swing.JFrame;
 /**
  *
  * @author d.gozzi
@@ -27,9 +28,10 @@ public class WhatsUp {
      */
     public static Socket socket;
     
-    public static boolean InputFromConsole = true;
+    public static boolean InputFromConsole = false;
     
     public static void main(String[] args) {
+        new GUIHandler();
         if(InputFromConsole)
         {
             try 
@@ -37,9 +39,6 @@ public class WhatsUp {
                 SetSocketParameter("10.1.2.9");
                 // TODO code application logic here
                 BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
-                new WriterClass();
-                new ListenerClass();
-                new MessageHandler();
                 System.out.println(Color.YELLOW.getRGB());
                 while (true)
                 {                
@@ -56,7 +55,17 @@ public class WhatsUp {
                 Logger.getLogger(WhatsUp.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+            
+
+
+
+    }
+    
+    public static void SetUpIOWithServer()
+    {
+        new WriterClass();
+        new ListenerClass();
+        new MessageHandler();
     }
     
     public static void SetSocketParameter(String address)
@@ -69,7 +78,7 @@ public class WhatsUp {
         {
             System.out.println("Error creating Socket: " + ex);
         }
-
+        SetUpIOWithServer();
     }
     
 }

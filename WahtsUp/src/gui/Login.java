@@ -7,18 +7,21 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import wahtsup.GUIHandler;
+import wahtsup.MessageHandler;
+import wahtsup.WhatsUp;
+import wahtsup.WriterClass;
 
 public class Login extends JPanel {
 
-    private JLabel JLabelNickname;
-    private JTextField JTextFieldNick;
-    private JLabel JLabelColor;
-    private JLabel JLabelIP;
-    private JTextField JTextFieldIP;
-    private JLabel JLabelHost;
-    private JTextField jcomp8;
-    private JButton JButtonContinua;
-    private JCheckBox JCheckBoxCondizioni;
+    public JLabel JLabelNickname;
+    public JTextField JTextFieldNick;
+    public JLabel JLabelColor;
+    public JLabel JLabelIP;
+    public JTextField JTextFieldIP;
+    public JTextField jcomp8;
+    public JButton JButtonContinua;
+    public JCheckBox JCheckBoxCondizioni;
 
     public Login() {
         //construct components
@@ -27,7 +30,6 @@ public class Login extends JPanel {
         JLabelColor = new JLabel("Favorite color:");
         JLabelIP = new JLabel("IP Address: ");
         JTextFieldIP = new JTextField(5);
-        JLabelHost = new JLabel("Host:");
         jcomp8 = new JTextField(5);
         JButtonContinua = new JButton("Continue");
         JCheckBoxCondizioni = new JCheckBox("Dichiaro di avere letto e accettato le condizioni di servizio");
@@ -44,7 +46,6 @@ public class Login extends JPanel {
         add(JLabelColor);
         add(JLabelIP);
         add(JTextFieldIP);
-        add(JLabelHost);
         add(jcomp8);
         add(JButtonContinua);
         add(JCheckBoxCondizioni);
@@ -62,10 +63,22 @@ public class Login extends JPanel {
         JLabelColor.setBounds(80, 80, 100, 25);
         JLabelIP.setBounds(90, 150, 100, 25);
         JTextFieldIP.setBounds(185, 150, 100, 25);
-        JLabelHost.setBounds(125, 190, 45, 25);
         jcomp8.setBounds(185, 190, 100, 25);
         JButtonContinua.setBounds(35, 240, 100, 25);
-        JCheckBoxCondizioni.setBounds(10, 245, 375, 60);
+        JCheckBoxCondizioni.setBounds(10, 270, 375, 60);
+        
+        JButtonContinua.addActionListener(new ActionListener() 
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                WhatsUp.SetSocketParameter(JTextFieldIP.getText());
+                System.out.println(JTextFieldNick.getText());
+                WriterClass.instance.PresentateMySelf(JTextFieldNick.getText(), colorChooser.getSelectedColor());
+                GUIHandler.instance.LoadShowRoom();
+            }
+            
+        });
     }
 
     public static void main(String[] args) {

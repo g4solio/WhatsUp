@@ -70,12 +70,16 @@ public class MessageHandler
             } 
             if(message.contains("AvailableRooms"))
             {
+                GUIHandler.instance.getStanzePanel().ResetListRoom();
+                GUIHandler.instance.getStanzePanel().ResetJList();
                 String[] metaMessage = message.split(":");
                 for (int i = 1; i < metaMessage.length; i+=2)
                 {
                     System.out.println(metaMessage[i] + " is an available room with this id: " + metaMessage[i+1]);
+                    GUIHandler.instance.getStanzePanel().AddNewRoomToList(metaMessage[i], Integer.parseInt(metaMessage[i+1]));
                     //Handle available room
                 }
+                GUIHandler.instance.getStanzePanel().UpdateJList();
                 return;
             } 
         }

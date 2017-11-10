@@ -9,11 +9,11 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class Entrata extends JPanel {
-    private JLabel JLabelWelcome;
-    private JLabel JLabelPass;
-    private JPasswordField JTextFieldPass;
-    private JButton jcomp4;
-    private JButton jcomp5;
+    public JLabel JLabelWelcome;
+    public JLabel JLabelPass;
+    public JPasswordField JTextFieldPass;
+    public JButton jcomp4;
+    public JButton jcomp5;
 
     public Entrata() {
         //construct components
@@ -43,11 +43,11 @@ public class Entrata extends JPanel {
     }
 
 
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("Nuova");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new Nuova());
-        frame.pack();
-        frame.setVisible (true);
-    }
+//    public static void main (String[] args) {
+//        JFrame frame = new JFrame ("Nuova");
+//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add (new Nuova());
+//        frame.pack();
+//        frame.setVisible (true);
+//    }
 }

@@ -9,13 +9,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class Chat extends JPanel {
-    private JTextArea jcomp1;
-    private JTextArea jcomp2;
-    private JTextField jcomp3;
-    private JButton JButtonInvio;
-    private JLabel JLabelStanza;
-    private JLabel JLabelPartecipanti;
-    private JButton JButtonEsci;
+    public JTextArea jcomp1;
+    public JTextArea jcomp2;
+    public JTextField jcomp3;
+    public JButton JButtonInvio;
+    public JLabel JLabelStanza;
+    public JLabel JLabelPartecipanti;
+    public JButton JButtonEsci;
 
     public Chat() {
         //construct components
@@ -51,11 +51,11 @@ public class Chat extends JPanel {
     }
 
 
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("Chat");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new Chat());
-        frame.pack();
-        frame.setVisible (true);
-    }
+//    public static void main (String[] args) {
+//        JFrame frame = new JFrame ("Chat");
+//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add (new Chat());
+//        frame.pack();
+//        frame.setVisible (true);
+//    }
 }
