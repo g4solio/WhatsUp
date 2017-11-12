@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import wahtsup.GUIHandler;
+import wahtsup.WriterClass;
 
 public class Entrata extends JPanel {
     public JLabel JLabelWelcome;
@@ -17,7 +19,7 @@ public class Entrata extends JPanel {
 
     public Entrata() {
         //construct components
-        JLabelWelcome = new JLabel ("Welcome to ");
+        JLabelWelcome = new JLabel ("Welcome to " + Stanze.selectedRoom);
         JLabelPass = new JLabel ("Password: ");
         JTextFieldPass = new JPasswordField (5);
         jcomp4 = new JButton ("Esci");
@@ -40,6 +42,11 @@ public class Entrata extends JPanel {
         JTextFieldPass.setBounds (135, 80, 100, 25);
         jcomp4.setBounds (110, 130, 60, 25);
         jcomp5.setBounds (175, 130, 85, 25);
+        
+        jcomp5.addActionListener((ActionEvent e) ->
+        {
+            WriterClass.instance.AddMeToRoom(Stanze.selectedRoomId, String.valueOf(JTextFieldPass.getPassword()));
+        });
     }
 
 

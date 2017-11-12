@@ -37,19 +37,22 @@ public class MessageHandler
         String message = splittedMsg[1];
         if (tipeOfMessage.contains("Communication"))
         {
-            //HandleTheComunication
+            String[] metaMessage = message.split(":");
+            System.out.println(message);
+            GUIHandler.instance.getChatPanel().AddNewMessageChat(metaMessage[2], metaMessage[0],Integer.parseInt(metaMessage[1]));
         }
         if (tipeOfMessage.contains("Settings"))
         {
             if(message.contains("AcceptedToRoom"))
             {
-                //HandleAcceptation
+                GUIHandler.instance.LoadChat();
                 return;
             }
             if(message.contains("NotAcceptedToRoom"))
             {
                 String[] metaMessage = message.split(":");
                 System.out.println("Cannot connect to the room: " + metaMessage[1]);
+                GUIHandler.instance.LoadShowRoom();
                 //HandleNotAcceptation
                 return;
             }
@@ -61,11 +64,14 @@ public class MessageHandler
             if(message.contains("PeopleInRoom"))
             {
                 String[] metaMessage = message.split(":");
+                String[] peopleInRoom = new String[metaMessage.length-1];
                 for (int i = 1; i < metaMessage.length; i++)
                 {
                     System.out.println(metaMessage[i] + " is in my room");
+                    peopleInRoom[i-1] = metaMessage[i];
                     //Handle People In Room
                 }
+                GUIHandler.instance.getChatPanel().SetPartecipati(peopleInRoom);
                 return;
             } 
             if(message.contains("AvailableRooms"))

@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import wahtsup.GUIHandler;
+import wahtsup.WhatsUp;
+import wahtsup.WriterClass;
 
 /**
  *
@@ -67,6 +70,17 @@ public class Nuova extends JPanel {
         JButtonEsci.setBounds (115, 235, 70, 25);
         
         JButtonCrea.setBounds (190, 235, 100, 25);
+        
+        
+        JButtonCrea.addActionListener((ActionEvent e) ->
+        {
+            WriterClass.instance.CreateARoom(JTextFieldNome.getText(), String.valueOf(JTextFieldPass1.getPassword()), (int)max.getValue());
+        });
+        
+        JButtonEsci.addActionListener((ActionEvent e) ->
+        {
+            GUIHandler.instance.LoadShowRoom();
+        });
     }
 
 

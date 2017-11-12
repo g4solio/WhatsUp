@@ -19,7 +19,6 @@ public class Login extends JPanel {
     public JLabel JLabelColor;
     public JLabel JLabelIP;
     public JTextField JTextFieldIP;
-    public JTextField jcomp8;
     public JButton JButtonContinua;
     public JCheckBox JCheckBoxCondizioni;
 
@@ -30,7 +29,6 @@ public class Login extends JPanel {
         JLabelColor = new JLabel("Favorite color:");
         JLabelIP = new JLabel("IP Address: ");
         JTextFieldIP = new JTextField(5);
-        jcomp8 = new JTextField(5);
         JButtonContinua = new JButton("Continue");
         JCheckBoxCondizioni = new JCheckBox("Dichiaro di avere letto e accettato le condizioni di servizio");
         ColorChooserButton colorChooser = new ColorChooserButton(Color.BLACK);
@@ -46,16 +44,13 @@ public class Login extends JPanel {
         add(JLabelColor);
         add(JLabelIP);
         add(JTextFieldIP);
-        add(jcomp8);
         add(JButtonContinua);
         add(JCheckBoxCondizioni);
 
         //set component bounds (only needed by Absolute Positioning)
-        colorChooser.addColorChangedListener(new ColorChangedListener() {
-            @Override
-            public void colorChanged(Color newColor) {
-                // do something with newColor ...
-            }
+        colorChooser.addColorChangedListener((Color newColor) ->
+        {
+            // do something with newColor ...
         });
         colorChooser.setBounds(215, 80, 25, 25);
         JLabelNickname.setBounds(100, 40, 100, 25);
@@ -63,29 +58,23 @@ public class Login extends JPanel {
         JLabelColor.setBounds(80, 80, 100, 25);
         JLabelIP.setBounds(90, 150, 100, 25);
         JTextFieldIP.setBounds(185, 150, 100, 25);
-        jcomp8.setBounds(185, 190, 100, 25);
         JButtonContinua.setBounds(35, 240, 100, 25);
         JCheckBoxCondizioni.setBounds(10, 270, 375, 60);
         
-        JButtonContinua.addActionListener(new ActionListener() 
+        JButtonContinua.addActionListener((ActionEvent ae) -> 
         {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                WhatsUp.SetSocketParameter(JTextFieldIP.getText());
-                System.out.println(JTextFieldNick.getText());
-                WriterClass.instance.PresentateMySelf(JTextFieldNick.getText(), colorChooser.getSelectedColor());
-                GUIHandler.instance.LoadShowRoom();
-            }
-            
+            WhatsUp.SetSocketParameter(JTextFieldIP.getText());
+            System.out.println(JTextFieldNick.getText());
+            WriterClass.instance.PresentateMySelf(JTextFieldNick.getText(), colorChooser.getSelectedColor());
+            GUIHandler.instance.LoadShowRoom();
         });
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new Login());
-        frame.pack();
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame("Login");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add(new Login());
+//        frame.pack();
+//        frame.setVisible(true);
+//    }
 }

@@ -7,10 +7,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import wahtsup.GUIHandler;
+import wahtsup.WhatsUp;
+import wahtsup.WriterClass;
 
 public class Chat extends JPanel {
-    public JTextArea jcomp1;
-    public JTextArea jcomp2;
+    public JLabel jcomp1;
+    public JLabel jcomp2;
     public JTextField jcomp3;
     public JButton JButtonInvio;
     public JLabel JLabelStanza;
@@ -19,12 +22,12 @@ public class Chat extends JPanel {
 
     public Chat() {
         //construct components
-        jcomp1 = new JTextArea (5, 5);
-        jcomp2 = new JTextArea (5, 5);
+        jcomp1 = new JLabel("pROVA1");
+        jcomp2 = new JLabel("prova2");
         jcomp3 = new JTextField (5);
         JButtonInvio = new JButton ("I");
-        JLabelStanza = new JLabel ("Stanza");
-        JLabelPartecipanti = new JLabel ("5");
+        JLabelStanza = new JLabel ("");
+        JLabelPartecipanti = new JLabel (Stanze.selectedRoom);
         JButtonEsci = new JButton ("Esci");
 
         //adjust size and set layout
@@ -48,9 +51,41 @@ public class Chat extends JPanel {
         JLabelStanza.setBounds (25, 15, 100, 25);
         JLabelPartecipanti.setBounds (95, 15, 100, 25);
         JButtonEsci.setBounds (515, 10, 65, 25);
+        
+        JButtonInvio.addActionListener((ActionEvent e) ->
+        {
+            WriterClass.instance.WriteComunication(jcomp3.getText());
+        });
+        
+        JButtonEsci.addActionListener((ActionEvent e) ->
+        {
+            WriterClass.instance.RemoveMeFromRoom();
+            GUIHandler.instance.LoadShowRoom();
+        });
     }
 
+    public void SetPartecipati(String[] partecipanti)
+    {
+        for (String partecipante : partecipanti)
+        {
+            System.out.println("Adding to Partecipanti: " + partecipante );
+            jcomp2.setText(partecipante + "\n");
+        }
+    }
+    
+    public void AddNewMessageChat(String msg, String nickName, int color)
+    {
+        jcomp1.setText(jcomp1.getText() + "\n" + nickName + ": " + msg);
+    }
 
+    public void ResetChatAndPartecipanti()
+    {
+        jcomp1.setText("");
+        jcomp2.setText("");
+    }
+    
+    
+        
 //    public static void main (String[] args) {
 //        JFrame frame = new JFrame ("Chat");
 //        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);

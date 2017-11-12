@@ -18,39 +18,61 @@ import static wahtsup.WhatsUp.socket;
  */
 public class ListenerClass extends Thread
 {
+
     public BufferedReader listenerFromServer;
     public static ListenerClass instance = null;
-    
+    public boolean canRun = true;
+
     public ListenerClass()
     {
-        if(instance != null) return;
+        if (instance != null)
+        {
+            return;
+        }
         instance = this;
-        try 
+        try
         {
             listenerFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException ex) 
+        } catch (IOException ex)
         {
             System.out.println("Error Creating listener: " + ex);
         }
         this.start();
     }
-    
+
     @Override
     public void run()
     {
         String msgFromServer;
-        while (true) 
-        {            
-            try 
+        while (canRun)
+        {
+            try
             {
                 msgFromServer = listenerFromServer.readLine();
                 System.out.println("Msg From Server: " + msgFromServer);
                 MessageHandler.instance.HandleMsg(msgFromServer);
-            } catch (IOException ex) 
+            } catch (IOException ex)
             {
                 System.out.println("Error Reading From Socket: " + ex);
             }
         }
-  
+
+    }
+
+    public void StopThread()
+    {
+        canRun = false;
+        try
+        {
+            listenerFromServer.close();
+            this.join();
+        } catch (InterruptedException ex)
+        {
+            System.out.println("Error closing thread: " + ex);
+        } catch (IOException ex)
+        {
+            System.out.println("Error closing thread: " + ex);
+
+        }
     }
 }

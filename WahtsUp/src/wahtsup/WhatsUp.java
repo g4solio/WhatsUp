@@ -17,68 +17,81 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import gui.*;
 import javax.swing.JFrame;
+
 /**
  *
  * @author d.gozzi
  */
-public class WhatsUp {
+public class WhatsUp
+{
 
     /**
      * @param args the command line arguments
      */
     public static Socket socket;
-    
+
     public static boolean InputFromConsole = false;
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args)
+    {
         new GUIHandler();
-        if(InputFromConsole)
+        if (InputFromConsole)
         {
-            try 
+            try
             {
                 SetSocketParameter("10.1.2.9");
                 // TODO code application logic here
                 BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
                 System.out.println(Color.YELLOW.getRGB());
                 while (true)
-                {                
+                {
 
                     String userInput = inputKeyboard.readLine();
                     WriterClass.instance.WriteToServer(userInput);
 
                 }
 
-
-            } 
-            catch (IOException ex) 
+            } catch (IOException ex)
             {
                 Logger.getLogger(WhatsUp.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-            
-
-
 
     }
-    
+
+    public static void CloseConnection()
+    {
+
+        try
+        {
+            WriterClass.instance.Disconnecting();
+            WriterClass.instance.writerToServer.close();
+            ListenerClass.instance.StopThread();
+            socket.close();
+
+        } catch (IOException ex)
+        {
+            System.out.println("Error Disconnectiong: " + ex);
+        }
+    }
+
     public static void SetUpIOWithServer()
     {
         new WriterClass();
         new ListenerClass();
         new MessageHandler();
     }
-    
+
     public static void SetSocketParameter(String address)
     {
-        try 
+        try
         {
-            socket = new Socket(InetAddress.getByName(address),1050);
-        } 
-        catch (IOException ex) 
+            socket = new Socket(InetAddress.getByName(address), 1050);
+        } catch (IOException ex)
         {
             System.out.println("Error creating Socket: " + ex);
         }
         SetUpIOWithServer();
     }
-    
+
 }

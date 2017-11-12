@@ -28,6 +28,14 @@ public class GUIHandler {
         
     }
     
+    public void CloseTheProgram()
+    {
+        WhatsUp.CloseConnection();
+        mainFrame.setVisible(false);
+        mainFrame.dispose();
+    }
+    
+    
     Login myLoginPanel = null;
     public  Login getLoginPanel()
     {
@@ -52,8 +60,9 @@ public class GUIHandler {
     public void LoadChat()
     {
         mainFrame.getContentPane().removeAll();
-        mainFrame.getContentPane().add(getLoginPanel());
+        mainFrame.getContentPane().add(getChatPanel());
         mainFrame.pack();
+        getChatPanel().ResetChatAndPartecipanti();
     }
     
     Entrata myEntrata = null;

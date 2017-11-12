@@ -27,7 +27,10 @@ public class ClientListenerMessageHandler
 
     public void HandleMsg(ConnectedClient client, String msg)
     {
-        if(msg.equals("") || msg.equals(" ") || msg == null) return;
+        if (msg.equals("") || msg.equals(" ") || msg == null)
+        {
+            return;
+        }
         System.out.println("Handling msg: " + msg);
         String[] splittedMsg = msg.split(">", 2);
 
@@ -35,7 +38,10 @@ public class ClientListenerMessageHandler
         String message = splittedMsg[1];
         if (tipeOfMessage.contains("Communication"))
         {
-            if(client.roomConnected == null) System.out.println("That sould never happen");
+            if (client.roomConnected == null)
+            {
+                System.out.println("That sould never happen");
+            }
             client.roomConnected.SendMsgToAllClients(message, client);
             return;
         }
@@ -44,8 +50,7 @@ public class ClientListenerMessageHandler
             if (message.equals("RemoveMeFromRoom"))
             {
                 client.roomConnected.RemoveClientFromRoom(client);
-                
-                
+
                 return;
             }
             if (message.contains("AddMeToRoom"))
@@ -79,7 +84,7 @@ public class ClientListenerMessageHandler
             {
                 String[] metaMessage = message.split(":");
                 int success = WhatsUpServer.CreateRoom(client, metaMessage[1], metaMessage[2], Integer.parseInt(metaMessage[3]));
-
+                ClientSpeaker.instance.SendMsgToClient(client.clientWriter, "<Settings>AcceptedToRoom");
                 return;
             }
             if (message.contains("Disconnecting"))
