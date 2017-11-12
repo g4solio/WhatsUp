@@ -5,6 +5,9 @@ package gui;
 import gui.ColorChooserButton.ColorChangedListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.*;
 import wahtsup.GUIHandler;
@@ -12,7 +15,8 @@ import wahtsup.MessageHandler;
 import wahtsup.WhatsUp;
 import wahtsup.WriterClass;
 
-public class Login extends JPanel {
+public class Login extends JPanel
+{
 
     public JLabel JLabelNickname;
     public JTextField JTextFieldNick;
@@ -21,8 +25,10 @@ public class Login extends JPanel {
     public JTextField JTextFieldIP;
     public JButton JButtonContinua;
     public JCheckBox JCheckBoxCondizioni;
+    public JLabel errorLabel;
 
-    public Login() {
+    public Login()
+    {
         //construct components
         JLabelNickname = new JLabel("Nickname: ");
         JTextFieldNick = new JTextField(10);
@@ -32,6 +38,7 @@ public class Login extends JPanel {
         JButtonContinua = new JButton("Continue");
         JCheckBoxCondizioni = new JCheckBox("Dichiaro di avere letto e accettato le condizioni di servizio");
         ColorChooserButton colorChooser = new ColorChooserButton(Color.BLACK);
+        errorLabel = new JLabel();
 
         //adjust size and set layout
         setPreferredSize(new Dimension(371, 317));
@@ -46,7 +53,7 @@ public class Login extends JPanel {
         add(JTextFieldIP);
         add(JButtonContinua);
         add(JCheckBoxCondizioni);
-
+        add(errorLabel);
         //set component bounds (only needed by Absolute Positioning)
         colorChooser.addColorChangedListener((Color newColor) ->
         {
@@ -60,13 +67,32 @@ public class Login extends JPanel {
         JTextFieldIP.setBounds(185, 150, 100, 25);
         JButtonContinua.setBounds(35, 240, 100, 25);
         JCheckBoxCondizioni.setBounds(10, 270, 375, 60);
-        
-        JButtonContinua.addActionListener((ActionEvent ae) -> 
+        errorLabel.setBounds(30, 180, 340, 50);
+        JButtonContinua.addActionListener((ActionEvent ae) ->
         {
-            WhatsUp.SetSocketParameter(JTextFieldIP.getText());
-            System.out.println(JTextFieldNick.getText());
-            WriterClass.instance.PresentateMySelf(JTextFieldNick.getText(), colorChooser.getSelectedColor());
-            GUIHandler.instance.LoadShowRoom();
+            if (JLabelNickname.getText().isEmpty() || JLabelNickname.getText().contains(":"))
+            {
+                errorLabel.setText("<html><font color = red >pls Insert a valid Username</font></html>");
+
+            }
+            if (!JCheckBoxCondizioni.isSelected())
+            {
+                errorLabel.setText("<html><font color = red >U have to check the terms and conditions box</font></html>");
+                return;
+            }
+            try
+            {
+                WhatsUp.SetSocketParameter(JTextFieldIP.getText());
+                System.out.println(JTextFieldNick.getText());
+                WriterClass.instance.PresentateMySelf(JTextFieldNick.getText(), colorChooser.getSelectedColor());
+                GUIHandler.instance.LoadShowRoom();
+
+            } catch (IOException ex)
+            {
+                errorLabel.setText("<html><font color = red >Error creating Connection to the server, check the parameters then retry later on</font></html>");
+                System.out.println("Error creating socket: " + ex);
+            }
+
         });
     }
 

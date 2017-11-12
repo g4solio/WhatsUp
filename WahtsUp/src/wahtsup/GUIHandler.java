@@ -25,6 +25,7 @@ public class GUIHandler {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LoadLogin();
         mainFrame.setVisible(true);
+        mainFrame.setResizable(false);
         
     }
     
@@ -76,6 +77,7 @@ public class GUIHandler {
         mainFrame.getContentPane().removeAll();
         mainFrame.getContentPane().add(getEntrataPanel());
         mainFrame.pack();
+        getEntrataPanel().ResetErrorLabel();
     }
 
     Nuova myNuovaPanel = null;
@@ -89,6 +91,7 @@ public class GUIHandler {
         mainFrame.getContentPane().removeAll();
         mainFrame.getContentPane().add(getNuovaPanel());
         mainFrame.pack();
+        getNuovaPanel().ResetLabel();
     }
     
     Stanze myStanzePanel = null;

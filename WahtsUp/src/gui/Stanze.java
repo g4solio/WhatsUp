@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import wahtsup.GUIHandler;
 import wahtsup.WriterClass;
 
@@ -17,7 +18,7 @@ public class Stanze extends JPanel
     public JButton JButtonAggiorna;
     public JButton JButtonEsci;
     public JButton JButtonPartecipa;
-    public ArrayList<String> roomsList;
+    public DefaultListModel<String> roomsList;
     public ArrayList<Integer> roomsListId;
     public static String selectedRoom = "";
     public static int selectedRoomId;
@@ -25,9 +26,11 @@ public class Stanze extends JPanel
     public Stanze()
     {
         //construct components
-        roomsList = new ArrayList<String>();
+        roomsList = new DefaultListModel<String>();
         roomsListId = new ArrayList<>();
-        jcomp1 = new JList<>();
+        jcomp1 = new JList<String>(roomsList);
+        //roomsList.addElement("Testoso");
+
         JButtonNuova = new JButton("Nuova stanza");
         JButtonAggiorna = new JButton("Aggiorna");
         JButtonEsci = new JButton("Esci");
@@ -75,9 +78,11 @@ public class Stanze extends JPanel
                 GUIHandler.instance.LoadLoginRoom();
             } catch (Exception ex)
             {
-                
+
             }
         });
+        jcomp1.setCellRenderer(new DefaultListCellRenderer());
+
     }
 
 //    public static void main (String[] args) {
@@ -94,7 +99,7 @@ public class Stanze extends JPanel
 
     public void AddNewRoomToList(String roomName, int idRoom)
     {
-        roomsList.add(roomName);
+        roomsList.addElement(roomName);
         roomsListId.add(idRoom);
     }
 
@@ -102,15 +107,5 @@ public class Stanze extends JPanel
     {
         roomsList.clear();
         roomsListId.clear();
-    }
-
-    public void ResetJList()
-    {
-        jcomp1.setListData(new String[0]);
-    }
-
-    public void UpdateJList()
-    {
-        jcomp1.setListData(roomsList.toArray());
     }
 }

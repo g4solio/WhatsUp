@@ -56,7 +56,9 @@ public class ClientListenerMessageHandler
             if (message.contains("AddMeToRoom"))
             {
                 String[] metaMessage = message.split(":");
-                int success = WhatsUpServer.AddClientToRoom(client, Integer.parseInt(metaMessage[1]), metaMessage[2]);
+                int success;
+                if(metaMessage.length < 3) { success = WhatsUpServer.AddClientToRoom(client, Integer.parseInt(metaMessage[1]), ""); }
+                else { success = WhatsUpServer.AddClientToRoom(client, Integer.parseInt(metaMessage[1]), metaMessage[2]); } 
                 if (success == 0)
                 {
                     ClientSpeaker.instance.SendMsgToClient(client.clientWriter, "<Settings>AcceptedToRoom");
@@ -104,7 +106,7 @@ public class ClientListenerMessageHandler
             }
             if (message.contains("ListOfRooms"))
             {
-                String availableRooms = "<Settings>ListOfRooms";
+                String availableRooms = "<Settings>AvailableRooms";
                 for (Room availableRoom : WhatsUpServer.RoomsList)
                 {
                     availableRooms += ":" + availableRoom.name + ":" + availableRoom.id;

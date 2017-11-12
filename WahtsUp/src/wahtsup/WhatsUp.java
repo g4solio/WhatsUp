@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import gui.*;
+import java.net.UnknownHostException;
 import javax.swing.JFrame;
 
 /**
@@ -82,16 +83,12 @@ public class WhatsUp
         new MessageHandler();
     }
 
-    public static void SetSocketParameter(String address)
+    public static void SetSocketParameter(String address) throws UnknownHostException, IOException
     {
-        try
-        {
-            socket = new Socket(InetAddress.getByName(address), 1050);
-        } catch (IOException ex)
-        {
-            System.out.println("Error creating Socket: " + ex);
-        }
+
+        socket = new Socket(InetAddress.getByName(address), 1050);
         SetUpIOWithServer();
+
     }
 
 }
