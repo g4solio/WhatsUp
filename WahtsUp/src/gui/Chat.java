@@ -46,7 +46,7 @@ public class Chat extends JPanel
         add(JButtonEsci);
 
         //set component bounds (only needed by Absolute Positioning)
-        jcomp1.setBounds(15, 45, 435, 310);
+        jcomp1.setBounds(15, 45, 435, 280);
         jcomp2.setBounds(460, 45, 130, 310);
         jcomp3.setBounds(15, 360, 390, 25);
         JButtonInvio.setBounds(410, 360, 40, 25);
@@ -93,13 +93,14 @@ public class Chat extends JPanel
     {
         String previusText = jcomp1.getText().substring(0, jcomp1.getText().length() - 6);
         Color textColor = new Color(color);
-        jcomp1.setText(previusText + "<br>" + "<font color = rgb(" + textColor.getRed() + "," + textColor.getGreen() + "," + textColor.getBlue() + ")>" + nickName + "</font>" + ": " + msg + "</html>");
+        jcomp1.setText(previusText + "<br>" + "<font color = rgb(" + textColor.getRed() + "," + textColor.getGreen() + "," + textColor.getBlue() + ")>" + nickName + "</font>" + ": " + msg + "<br>" + "</html>");
     }
 
     public void ResetChatAndPartecipanti()
     {
         jcomp1.setText("<html></html>");
         jcomp2.setText("<html></html>");
+        JLabelPartecipanti.setText(Stanze.selectedRoom);
     }
 
 //    public static void main (String[] args) {

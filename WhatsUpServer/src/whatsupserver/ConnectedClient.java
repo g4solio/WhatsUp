@@ -63,6 +63,7 @@ public class ConnectedClient extends Thread
             } catch (IOException ex) 
             {
                 System.out.println("Error reading the socket " + ex);
+                Disconnect();
             }
              
         }

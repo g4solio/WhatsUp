@@ -81,6 +81,7 @@ public class Nuova extends JPanel
         {
             if (String.valueOf(JTextFieldPass1.getPassword()).equals(String.valueOf(JTextFieldPass2.getPassword())))
             {
+                Stanze.selectedRoom = JTextFieldNome.getText();
                 WriterClass.instance.CreateARoom(JTextFieldNome.getText(), String.valueOf(JTextFieldPass1.getPassword()), (int) max.getValue());
                 return;
             }
@@ -93,7 +94,7 @@ public class Nuova extends JPanel
             GUIHandler.instance.LoadShowRoom();
         });
     }
-    
+
     public void ResetLabel()
     {
         jcomp4.setText("");
@@ -101,7 +102,6 @@ public class Nuova extends JPanel
         JTextFieldPass1.setText("");
         JTextFieldPass2.setText("");
     }
-    
 
 //    public static void main (String[] args) {
 //        JFrame frame = new JFrame ("Nuova");

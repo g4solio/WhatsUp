@@ -40,7 +40,7 @@ public class WhatsUp
         {
             try
             {
-                SetSocketParameter("10.1.2.9");
+                SetSocketParameter("127.0.0.1");
                 // TODO code application logic here
                 BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));
                 System.out.println(Color.YELLOW.getRGB());
