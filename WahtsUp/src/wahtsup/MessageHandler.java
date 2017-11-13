@@ -39,6 +39,11 @@ public class MessageHandler
         {
             String[] metaMessage = message.split(":");
             System.out.println(message);
+            if(metaMessage.length < 3)
+            {
+               GUIHandler.instance.getChatPanel().AddNewMessageChat("", metaMessage[0], Integer.parseInt(metaMessage[1])); 
+               return;
+            }    
             GUIHandler.instance.getChatPanel().AddNewMessageChat(metaMessage[2], metaMessage[0], Integer.parseInt(metaMessage[1]));
         }
         if (tipeOfMessage.contains("Settings"))
