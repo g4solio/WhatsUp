@@ -37,7 +37,7 @@ public class MessageHandler
         String message = splittedMsg[1];
         if (tipeOfMessage.contains("Communication"))
         {
-            String[] metaMessage = message.split(":");
+            String[] metaMessage = message.split(":",3);
             System.out.println(message);
             if(metaMessage.length < 3)
             {

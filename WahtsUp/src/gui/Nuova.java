@@ -79,6 +79,11 @@ public class Nuova extends JPanel
 
         JButtonCrea.addActionListener((ActionEvent e) ->
         {
+            if (JTextFieldNome.getText().contains(":") || String.valueOf(JTextFieldPass1.getPassword()).contains(":"))
+            {
+                jcomp4.setText("<html><font color = red >il nuome o la password non puo contenere : </font></html>");
+                return;
+            }
             if (String.valueOf(JTextFieldPass1.getPassword()).equals(String.valueOf(JTextFieldPass2.getPassword())))
             {
                 Stanze.selectedRoom = JTextFieldNome.getText();

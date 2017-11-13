@@ -70,10 +70,11 @@ public class Login extends JPanel
         errorLabel.setBounds(30, 180, 340, 50);
         JButtonContinua.addActionListener((ActionEvent ae) ->
         {
-            if (JLabelNickname.getText().isEmpty() || JLabelNickname.getText().contains(":"))
+            System.out.println(JTextFieldNick.getText());
+            if (JTextFieldNick.getText().isEmpty() || JTextFieldNick.getText().contains(":"))
             {
                 errorLabel.setText("<html><font color = red >pls Insert a valid Username</font></html>");
-
+                return;
             }
             if (!JCheckBoxCondizioni.isSelected())
             {
