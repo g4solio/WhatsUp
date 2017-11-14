@@ -4,4 +4,3 @@ This is a Client Server Program written in java, It's OpenSource And Free to Use
 
 If You Want To support me in my future projects How about a donation?
 https://www.paypal.me/g4solio 
-School Project
