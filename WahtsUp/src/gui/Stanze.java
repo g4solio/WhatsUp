@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.event.ListDataListener;
 import wahtsup.GUIHandler;
 import wahtsup.WriterClass;
-
+@SuppressWarnings("unchecked")
 public class Stanze extends JPanel
 {
 
